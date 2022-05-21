@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<addon scheme="3.0">
+    <id>sd_departments</id>
+    <version>1.0</version>
+    <priority>1200</priority>
+    <position>10</position>
+    <status>active</status>
+    <default_language>en</default_language>
+
+    <queries>
+        <item for="install">
+            CREATE TABLE `?:departments` (
+            `department_id` INT(11) unsigned NOT NULL AUTO_INCREMENT,
+            `position` INT(11) unsigned NOT NULL DEFAULT 0,
+            `status` varchar(1) NOT NULL DEFAULT 'A',
+            `timestamp` INT(11) unsigned NOT NULL DEFAULT 0,
+            `user_id` INT(11) unsigned NOT NULL DEFAULT 0,
+            `users_id` text DEFAULT NULL,
+            PRIMARY KEY (`department_id`),  
+            KEY `user_id` (`user_id`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8
+        </item>
+        <item for="install">
+            CREATE TABLE `?:department_descriptions` (
+            `department_id` INT(11) unsigned NOT NULL DEFAULT 0,
+            `lang_code` char(2) NOT NULL DEFAULT '',
+            `department` varchar(255) NOT NULL DEFAULT '',
+            `description` text DEFAULT NULL,
+            PRIMARY KEY (`department_id`, `lang_code`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+        </item>
+
+        <item for="uninstall">DROP TABLE IF EXISTS ?:departments;</item>
+        <item for="uninstall">DROP TABLE IF EXISTS ?:department_descriptions;</item>
+    </queries>
+</addon>
